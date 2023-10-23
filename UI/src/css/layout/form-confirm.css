@@ -1,0 +1,54 @@
+#form-confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-confirm-container {
+  width: 400px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+  padding: 10px 16px;
+}
+
+.form-confirm-container .icon i {
+  color: rgb(243, 215, 0);
+  font-size: 30px;
+}
+
+.form-confirm-noti {
+  padding: 0 10px;
+  height: calc(100% - 50px);
+  display: flex;
+  gap: 30px;
+  justify-content: start;
+  align-items: center;
+}
+
+.form-confirm-control {
+  height: 50px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-confirm-control button {
+  box-shadow: none;
+}
+
+.form-confirm-control button.button-close {
+  border: 1px solid #ccc;
+}

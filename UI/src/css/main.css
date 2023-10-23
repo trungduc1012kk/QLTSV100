@@ -1,0 +1,132 @@
+@import url("./reset/reset.css");
+@import url("./base/button.css");
+@import url("./layout/menu.css");
+@import url("./icon/icon.css");
+@import url("./layout/header.css");
+@import url("./base/input.css");
+@import url("./base/combobox.css");
+@import url("./layout/context-menu.css");
+@import url("./layout/form-confirm.css");
+@import url("./layout/form-notice.css");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+p,
+input,
+body {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+  width: 0px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid rgba(26, 164, 200, 0.2);
+  border-bottom: 10px solid rgba(26, 164, 200, 0.2);
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+[data-tip] {
+  position: relative;
+}
+
+[data-tip]:hover::after {
+  display: block;
+}
+
+[data-tip]:after {
+  width: fit-content;
+  padding: 2px 6px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+  content: attr(data-tip);
+  display: none;
+  position: absolute;
+  z-index: 10000;
+  border-radius: 2px;
+  white-space: nowrap;
+  margin: 4px;
+}
+
+.data-tip-right[data-tip]::after {
+  left: calc(100%);
+}
+
+.data-tip-left[data-tip]::after {
+  right: calc(100%);
+}
+
+.data-tip-top[data-tip]::after {
+  bottom: calc(100%);
+}
+
+.data-tip-bottom[data-tip]::after {
+  top: calc(100%);
+}

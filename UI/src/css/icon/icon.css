@@ -1,0 +1,277 @@
+.icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-print {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -331px -67px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-zoomout {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -245px -333px;
+  width: 14px;
+  height: 14px;
+}
+
+.icon-more {
+  background: url("../../assets/icon/qlts-icon.svg")no-repeat -383px -26px;
+  width: 3px;
+  height: 13px;
+}
+
+.icon-mode-horizontal {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -110px -420px;
+  width: 20px;
+  height: 15px;
+}
+
+.icon-mode-vertical {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -22px -421px;
+  width: 20px;
+  height: 14px;
+}
+
+.icon-logo {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -20px -680px;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-logout {
+  background: url('../../assets/icon/qlts-icon.svg') no-repeat -112px -553px;
+  width: 15px;
+  height: 15px;
+}
+
+.icon-tivi {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -21px -153px;
+  width: 22px;
+  height: 22px;
+}
+
+.active .icon-tivi,
+.router-link-active .icon-tivi {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -22px -198px;
+  width: 20px;
+  height: 21px;
+}
+
+.icon-oto {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -65px -153px;
+  width: 22px;
+  height: 23px;
+}
+
+.active .icon-oto,
+.router-link-active .icon-oto {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -65px -197px;
+  width: 22px;
+  height: 23px;
+}
+
+.icon-street {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -110px -153px;
+  width: 21px;
+  height: 23px;
+}
+
+.active .icon-street,
+.router-link-active .icon-street {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -110px -197px;
+  width: 21px;
+  height: 22px;
+}
+
+.icon-tool {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -153px -153px;
+  width: 22px;
+  height: 22px;
+}
+
+.active .icon-tool,
+.router-link-active .icon-tool {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -153px -197px;
+  width: 22px;
+  height: 22px;
+}
+
+.icon-category {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -197px -155px;
+  width: 22px;
+  height: 18px;
+}
+
+.active .icon-category,
+.router-link-active .icon-category {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -198px -200px;
+  width: 20px;
+  height: 17px;
+}
+
+.icon-search {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -241px -153px;
+  width: 22px;
+  height: 22px;
+}
+
+.active .icon-search,
+.router-link-active .icon-search {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -240px -196px;
+  width: 23px;
+  height: 23px;
+}
+
+.icon-report {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -329px -153px;
+  width: 22px;
+  height: 22px;
+}
+
+.router-link-active .icon-report {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -330px -198px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-left {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -29px -290px;
+  width: 7px;
+  height: 12px;
+}
+
+.icon-down {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -158px -293px;
+  width: 12px;
+  height: 7px;
+}
+
+.icon-down-black {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -158px -249px;
+  width: 12px;
+  height: 7px;
+}
+
+.icon-up-bold {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -28px -338px;
+  width: 8px;
+  height: 5px;
+}
+
+.icon-down-bold {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -72px -338px;
+  width: 8px;
+  height: 5px;
+}
+
+.icon-notify {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -332px -109px;
+  width: 16px;
+  height: 20px;
+}
+
+.icon-option {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -199px -23px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-user {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -23px -23px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-search-black {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -243px -23px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-filter {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -243px -69px;
+  width: 17px;
+  height: 16px;
+}
+
+.icon-excel {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -287px -111px;
+  width: 18px;
+  height: 17px;
+}
+
+.icon-add {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -375px -419px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-remove {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -375px -463px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-Delete {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -463px -111px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-prev {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -206px -248px;
+  width: 5px;
+  height: 8px;
+}
+
+.icon-next {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -250px -248px;
+  width: 5px;
+  height: 8px;
+}
+
+.icon-close {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -377px -289px;
+  width: 14px;
+  height: 14px;
+}
+
+.icon-right {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat no-repeat -73px -290px;
+  width: 7px;
+  height: 12px;
+}
+
+.icon-warning {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -416px -66px;
+  width: 24px;
+  height: 20px;
+}
+
+.icon-help {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -67px -67px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon-Duplicate {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -244px -112px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-Edit {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -156px -68px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-delete-black {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -419px -111px;
+  width: 18px;
+  height: 18px;
+}

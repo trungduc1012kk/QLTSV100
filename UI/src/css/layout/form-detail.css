@@ -1,0 +1,188 @@
+#form-detail {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 11;
+}
+
+#form-detail .form-detail-container {
+  width: 60%;
+  height: fit-content;
+  /* max-height: 85vh; */
+  background-color: #fff;
+  position: absolute;
+  border-radius: 3px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* overflow-y: auto; */
+  /* overflow: hidden; */
+}
+
+#form-detail .form-detail-body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.form-detail-body {
+  max-height: 70vh;
+}
+
+.form-detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 20px 16px;
+  margin: 0;
+}
+
+.form-detail-header {
+  /* position: sticky;
+  top: 0;
+  left: 0; */
+  /* z-index: 12; */
+  width: 100%;
+  background-color: #fff;
+  padding: 20px 16px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-detail-text {
+  display: inline-block;
+}
+
+.form-detail-close {
+  border-radius: 3px;
+}
+
+.form-detail-close:hover {
+  background-color: #e5e5e5;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.form-detail-content .row .form-input {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.form-detail-content .row .combobox {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.form-detail-content .row .form-input {
+  border: none;
+}
+
+.form-detail-content .row .form-input .input {
+  width: 100%;
+}
+
+.input:read-only:hover,
+.input:read-only:focus,
+.input:read-only {
+  border: 1px solid #b0b0b0;
+  background-color: #f5f5f5;
+}
+
+.form-detail-content .row label span {
+  color: #e03232;
+}
+
+.col-2 {
+  grid-column: 2/4;
+}
+
+.form-detail-controler {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 52px;
+  background-color: #e5e5e5;
+  gap: 10px;
+  padding: 16px;
+  /* position: sticky;
+  bottom: 0;
+  left: 0; */
+}
+
+.error {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  color: #e03232;
+  white-space: nowrap;
+}
+
+.border-red {
+  border-color: #e03232 !important;
+}
+
+.el-date-editor.el-input {
+  width: 100% !important;
+  height: 36px !important;
+  font-size: 13px;
+}
+
+.el-input__wrapper {
+  border-radius: 2.5px !important;
+  border: 1px solid #afafaf;
+  height: 36px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: none !important;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0 2px 0 14px !important;
+
+}
+
+.el-input__wrapper.is-focus,
+.el-date-editor.el-input .el-input__wrapper:hover {
+  border-color: #1aa4c8;
+}
+
+.border-red .el-input__wrapper {
+  border-color: #e03232 !important;
+}
+
+.el-input__inner {
+  color: #001031 !important;
+}
+
+.el-date-editor.el-input .el-input__wrapper:hover .el-input__suffix {
+  display: none;
+}
+
+.el-icon {
+  font-size: 15px !important;
+}
+
+.el-picker-panel__content table tr {
+  border: none;
+}
+
+.el-picker-panel__content table tbody tr:hover {
+  background-color: #fff;
+}
+
+.el-picker-panel__content table th {
+  text-align: center;
+}
+
+.el-picker-panel__content table th:first-child,
+.el-picker-panel__content table td:first-child,
+.el-picker-panel__content table th:last-child,
+.el-picker-panel__content table td:last-child {
+  padding: 5px;
+}
+
+.form-input .el-input.is-disabled .el-input__wrapper {
+  background-color: #f5f5f5;
+}

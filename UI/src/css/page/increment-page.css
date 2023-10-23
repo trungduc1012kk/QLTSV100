@@ -1,0 +1,394 @@
+.increment-page {
+    background-color: #f4f7ff;
+    padding: 12px 20px;
+}
+
+.increment-control {
+    margin-bottom: 12px;
+}
+
+.increment-control .title h2 {
+    font-size: 18px;
+}
+
+.increment-control .control {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.increment-control .control .button {
+    min-width: 100px;
+}
+
+.increment-control .control .control-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 2px 4px;
+    gap: 4px;
+    border-radius: 3px;
+    height: 36px;
+    width: 60px;
+}
+
+.increment-control .control .btn {
+
+
+    background-color: #ffffff;
+    border-radius: 3px;
+    /* box-shadow: 0 2px 6px rgb(0 0 0 / 16%); */
+    width: 36px;
+    height: 36px;
+    border: none;
+}
+
+.increment-control .control .btn:hover {
+    box-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+}
+
+.detail .control-item {
+    cursor: pointer;
+}
+
+.increment-control .control .control-item:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .16);
+}
+
+.increment-container {
+    height: calc(100vh - 116px);
+    width: 100%;
+}
+
+.increment-container .master>.control {
+    background-color: #fff;
+    padding: 10px 0 10px 10px;
+}
+
+.increment-page .control .input {
+    width: 270px;
+}
+
+.increment-container .control .control-right {
+    display: flex;
+    align-items: center;
+}
+
+.detail,
+.master {
+    height: 100%;
+}
+
+.increment-page .table {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    height: 100%;
+}
+
+.table-increment#table {
+    height: calc(100% - 108px);
+}
+
+.table-increment#table th:nth-of-type(3),
+.table-increment#table td:nth-of-type(3),
+.table-increment#table th:nth-of-type(4),
+.table-increment#table td:nth-of-type(4),
+.table-increment#table th:nth-of-type(5),
+.table-increment#table td:nth-of-type(5),
+.table-increment#table th:nth-of-type(6),
+.table-increment#table td:nth-of-type(6) {
+    width: 36px;
+}
+
+.table-increment#table td:nth-of-type(3) {
+    color: #19A1C4;
+}
+
+.table-increment#table th:last-of-type,
+.table-increment#table td:last-of-type {
+    width: 0;
+}
+
+.table-increment#table tbody tr .trow-control {
+    visibility: visible;
+}
+
+.form-increment#form-detail .form-detail-container {
+    width: 60%;
+}
+
+.table-increment-detail#table {
+    height: calc(100% - 44px);
+}
+
+.table-increment#table tfoot::after {
+    display: none;
+}
+
+.increment-page .table-footer {
+    margin-top: 0;
+    border: none;
+    border-top: 2px solid #eee;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 6px;
+}
+
+
+.increment-page .detail-master .table-header {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.form-increment {
+    border-radius: 4px;
+}
+
+.form-select-property .form-detail-header {
+    border-bottom: 1px solid #eee;
+}
+
+.increment-page .form-detail-header {
+    padding: 16px;
+    background-color: transparent;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.increment-page .form-detail-header h2 {
+    font-size: 16px;
+}
+
+.form-increment-body {
+    background-color: #F4F7FF;
+    padding: 10px 16px;
+}
+
+.form-increment-body .form-top-body {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.form-increment-body h3 {
+    margin-bottom: 10px;
+}
+
+.form-increment-body .row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.form-increment-body .row:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.form-increment-body .row .col {
+    flex-grow: 1;
+}
+
+.form-increment-body .row .form-input {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.form-increment-body .row .form-input input {
+    width: 100%;
+}
+
+label span {
+    color: #e03232;
+}
+
+.form-increment-body .input-icon {
+    width: 225px;
+}
+
+.form-increment-body .form-bottom {
+    height: 280px;
+}
+
+.form-increment-body .form-bottom-body {
+    background-color: #fff;
+    border-radius: 4px;
+    height: calc(100% - 30px);
+}
+
+.form-bottom-body-control {
+    padding: 16px;
+}
+
+.form-increment-body .table-footer {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.form-increment-body #form-detail .form-detail-container {
+    width: 70%;
+}
+
+.increment-control .control-item {
+    position: relative;
+}
+
+.increment-control .control-item .select-mode {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background-color: #fff;
+    z-index: 11;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .16);
+}
+
+.increment-control .control-item .select-mode .mode-item {
+    justify-content: start;
+    gap: 6px;
+    padding: 4px 6px;
+    cursor: pointer;
+}
+
+.increment-control .control-item .select-mode .mode-item:hover {
+    background-color: rgba(26, 164, 200, 0.2);
+}
+
+.increment-control .control-item .select-mode .mode-item .text {
+    white-space: nowrap;
+    vertical-align: center;
+}
+
+.increment-page .form-select-property#form-detail .form-detail-container {
+    min-height: 400px;
+    width: 70%;
+    height: 85vh;
+}
+
+.increment-page .form-select-property#form-detail .form-detail-container .form-detail-body {
+    max-height: none;
+}
+
+.increment-page .form-select-property#form-detail #table {
+    height: 60vh;
+}
+
+.form-select-property .control {
+    padding: 10px 16px;
+}
+
+.table-property tfoot td:last-of-type,
+.table-property thead th:last-of-type,
+.table-property tbody td:last-of-type {
+    position: sticky;
+    right: -1px;
+}
+
+.table-property tfoot td:last-of-type,
+.table-property tbody td:last-of-type {
+    background-color: #ffffff;
+}
+
+.table-property tbody tr:hover td:last-of-type,
+.table-property tbody tr.active td:last-of-type {
+    background-color: #D1EDF4;
+}
+
+.table-property thead th:last-of-type {
+    background-color: #f5f5f5;
+}
+
+.table-property tbody td .trow-control {
+    visibility: unset !important;
+}
+
+.table-select-property thead::after,
+.table-property thead::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    height: 1px;
+    background-color: #f5f5f5;
+    width: 100%;
+}
+
+#form-detail.form-edit-property .form-detail-container {
+    width: 50%;
+}
+
+.form-edit-property .form-detail-body {
+    height: 400px;
+    padding: 0 16px;
+}
+
+.form-edit-property .form-detail-body .row {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+}
+
+.form-edit-property .form-detail-body .row .col1 {
+    flex-basis: 50%;
+}
+
+.form-edit-property .form-detail-body .row .col2 {
+    flex-basis: 25%;
+}
+
+.form-edit-property .form-detail-body .row .col3 {
+    flex-basis: 25%;
+}
+
+
+.form-edit-property .form-detail-body .row .col-department {
+    flex-basis: calc(75% - 6px);
+    margin-top: 10px;
+}
+
+.form-edit-property .form-detail-body .col-department .input,
+.form-edit-property .form-detail-body .col-department {
+    width: 100%;
+}
+
+.form-edit-property .row .form-input,
+.form-edit-property .row .input {
+    width: 100%;
+}
+
+
+.form-edit-control {
+    height: 100%;
+    justify-content: start;
+    gap: 10px;
+}
+
+.form-add-budget {
+    height: calc(100% - 180px);
+    overflow-y: scroll;
+}
+
+.form-add-budget::-webkit-scrollbar {
+    width: 0;
+}
+
+.total-budget {
+    margin-top: 10px;
+}
+
+#table.table-property {
+    height: calc(100% - 68px);
+}
+
+.col {
+    position: relative;
+}
