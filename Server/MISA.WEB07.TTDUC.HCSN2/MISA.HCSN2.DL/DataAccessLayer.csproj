@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\MISA.HCSN2.Common\MISA.HCSN2.Common.csproj" />
+		<ProjectReference Include="..\MISA.HCSN2.Common\Common.csproj" />
 	</ItemGroup>
 
 	<!--<configuration>
