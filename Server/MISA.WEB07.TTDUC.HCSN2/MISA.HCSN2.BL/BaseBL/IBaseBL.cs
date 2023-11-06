@@ -45,13 +45,6 @@ namespace MISA.HCSN2.BL
         /// <param name="record">thông tin bản ghi</param>
         /// <returns>ID bản ghi</returns>
         public Guid UpdateOneRecord(T record);
-
-        /// <summary>
-        /// Lấy mã mới
-        /// Author : TTDuc (05/09/2022)
-        /// </summary>
-        /// <param name="record">thông tin bản ghi</param>
-        /// <returns>ID bản ghi</returns>
         public string GetNewCode();
     }
 }

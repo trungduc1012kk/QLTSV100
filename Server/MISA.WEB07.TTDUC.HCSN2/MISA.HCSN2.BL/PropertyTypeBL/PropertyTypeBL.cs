@@ -23,6 +23,20 @@ namespace MISA.HCSN2.BL.PropertyTypeBL
             _propertyTypeDL = propertyTypeDL;
         }
 
+        #endregion
+
+        #region Method
+
+        public bool ValidateDeletePropertyType(Guid propertyTypeId)
+        {
+
+            return _propertyTypeDL.ValidateDeletePropertyType(propertyTypeId);
+        }
+
+        public IEnumerable<PropertyType> GetPropertyTypeWithFilter(string keyword)
+        {
+            return _propertyTypeDL.GetPropertyTypeWithFilter(keyword);
+        }
 
         #endregion
     }

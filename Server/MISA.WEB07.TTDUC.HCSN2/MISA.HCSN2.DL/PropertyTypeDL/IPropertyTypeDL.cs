@@ -9,5 +9,8 @@ namespace MISA.HCSN2.DL.PropertyTypeDL
 {
     public interface IPropertyTypeDL : IBaseDL<PropertyType>
     {
+        public bool ValidateDeletePropertyType(Guid propertyTypeId);
+
+        public IEnumerable<PropertyType> GetPropertyTypeWithFilter(string keyword);
     }
 }

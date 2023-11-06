@@ -1,31 +1,45 @@
-﻿namespace MISA.HCSN2.Common.Entities
+﻿using MISA.HCSN2.Common.Attributes;
+using System.ComponentModel.DataAnnotations;
+
+namespace MISA.HCSN2.Common.Entities
 {
     public class PropertyType
     {
         /// <summary>
         /// ID loại tài sản
         /// </summary>
+        [Key]
         public Guid PropertyTypeID { get; set; }
 
         /// <summary>
         /// Mã loại tài sản
         /// </summary>
+        [Required]
+        [DuplicateAttribute]
         public String PropertyTypeCode { get; set; }
 
         /// <summary>
         /// tên loại tài sản
         /// </summary>
+        [Required]
         public String PropertyTypeName { get; set; }
 
         /// <summary>
         /// Tỷ lệ hao mòn mặc định
         /// </summary>
+        [Required]
         public double AttritionRateDefault { get; set; }
 
         /// <summary>
         /// Số năm sử dụng mặc định
         /// </summary>
+        [Required]
         public int UsedYearDefault { get; set; }
+
+        /// <summary>
+        /// Ghi chú
+        /// </summary>
+        public string Description { get; set; }
 
 
         /// <summary>

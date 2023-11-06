@@ -9,5 +9,9 @@ namespace MISA.HCSN2.BL.PropertyTypeBL
 {
     public interface IPropertyTypeBL : IBaseBL<PropertyType>
     {
+        public bool ValidateDeletePropertyType(Guid propertyTypeId);
+
+        public IEnumerable<PropertyType> GetPropertyTypeWithFilter(string keyword);
+
     }
 }

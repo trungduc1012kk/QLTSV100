@@ -7,32 +7,19 @@
       </router-link>
       <ul class="navbar">
         <div v-for="item in items" :key="item" class="nav-item">
-          <router-link
-            class="nav-item-parent"
-            @click="
-              item.openChild = !item.openChild;
-              activeTo = item.to;
-            "
-            :to="item.to"
-            :class="activeTo === item.to ? 'active' : ''"
-          >
+          <router-link class="nav-item-parent" @click="
+            item.openChild = !item.openChild;
+          activeTo = item.to;" :to="item.to" :class="activeTo === item.to ? 'active' : ''">
             <div class="icon">
               <div :class="item.icon"></div>
             </div>
             <div class="nav-item-text" v-if="isZoomOut">{{ item.name }}</div>
             <div class="icon-down" v-if="item.subMenu && isZoomOut"></div>
           </router-link>
-          <div
-            class="nav-item-childs"
-            v-if="item.subMenu && activeTo === item.to"
-          >
-            <router-link
-              class="nav-item-child"
-              v-for="(child, index) in item.subMenu"
-              :key="index"
-              v-show="item.openChild && isZoomOut"
-              :to="child.subTo"
-              ><div class="icon">
+          <div class="nav-item-childs" v-if="item.subMenu && activeTo === item.to">
+            <router-link class="nav-item-child" v-for="(child, index) in item.subMenu" :key="index"
+              v-show="item.openChild && isZoomOut" :to="child.subTo">
+              <div class="icon">
                 <div class="icon-active"></div>
               </div>
               <div class="text">{{ child.subName }}</div>
@@ -83,36 +70,36 @@ export default {
             },
           ],
         },
-        {
-          icon: "icon-street",
-          name: "Tài sản HT-DB",
-          openChild: false,
-          to: "/taisanhbdt",
-        },
-        {
-          icon: "icon-tool",
-          name: "Công cụ công dụng",
-          openChild: false,
-          to: "/congcu",
-        },
+        // {
+        //   icon: "icon-street",
+        //   name: "Tài sản HT-DB",
+        //   openChild: false,
+        //   to: "/taisanhbdt",
+        // },
+        // {
+        //   icon: "icon-tool",
+        //   name: "Công cụ công dụng",
+        //   openChild: false,
+        //   to: "/congcu",
+        // },
         {
           icon: "icon-category",
-          name: "Danh mục",
+          name: "Loại tài sản",
           openChild: false,
-          to: "/danhmuc",
+          to: "/loaitaisan",
         },
         {
           icon: "icon-search",
-          name: "Tra cứu",
+          name: "Phòng ban",
           openChild: false,
-          to: "/timkiem",
+          to: "/phongban",
         },
-        {
-          icon: "icon-report",
-          name: "Báo cáo",
-          openChild: false,
-          to: "/baocao",
-        },
+        // {
+        //   icon: "icon-report",
+        //   name: "Báo cáo",
+        //   openChild: false,
+        //   to: "/baocao",
+        // },
       ],
     };
   },

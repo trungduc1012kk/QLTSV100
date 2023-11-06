@@ -78,6 +78,8 @@ export const NoticeMsg = {
 export const TitlePopup = {
   EditProperty: "Sửa tài sản",
   AddProperty: "Thêm tài sản",
+  AddPropertyType: "Thêm loại tài sản",
+  EditPropertyType: "Sửa loại tài sản",
 };
 
 export const TypeOfExcel =

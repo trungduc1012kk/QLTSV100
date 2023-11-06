@@ -23,7 +23,7 @@ namespace MISA.HCSN2.DL
             {
                 //tạo câu lệnh truy vấn 
                 string tableName = EntityUtilities.GetTableName<T>();
-                String getAllRecordsCommand = $"SELECT * FROM {tableName};";
+                String getAllRecordsCommand = $"SELECT * FROM {tableName} order by ModifiedDate Desc, CreatedDate Desc;";
 
                 // thực hiện chạy câu lệnh 
                 var records = mySqlConnection.Query<T>(getAllRecordsCommand);
@@ -279,9 +279,6 @@ namespace MISA.HCSN2.DL
                     newCode = maxCode + '0';
                 }
             }
-
-
-
 
             return newCode;
         }

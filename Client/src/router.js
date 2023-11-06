@@ -37,7 +37,7 @@ const routes = [
         component: ToolPage,
       },
       {
-        path: "/danhmuc",
+        path: "/loaitaisan",
         component: CategoryPage,
       },
       {
