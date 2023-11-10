@@ -4,6 +4,7 @@ import PropertyOverviewPage from "../src/components/page/PropertyOverviewPage.vu
 import PropertyManagementPage from "../src/components/page/PropertyManagementPage.vue";
 import ToolPage from "../src/components/page/ToolPage.vue";
 import CategoryPage from "../src/components/page/CategoryPage.vue";
+import DepartmentPage from "../src/components/page/DepartmentPage.vue";
 import ReportPage from "../src/components/page/ReportPage.vue";
 import SearchPage from "../src/components/page/SearchPage.vue";
 import PropertyHBDTPage from "../src/components/page/PropertyHBDTPage.vue";
@@ -41,12 +42,8 @@ const routes = [
         component: CategoryPage,
       },
       {
-        path: "/baocao",
-        component: ReportPage,
-      },
-      {
-        path: "/taisanhbdt",
-        component: PropertyHBDTPage,
+        path: "/phongban",
+        component: DepartmentPage,
       },
       {
         path: "/ghitang",

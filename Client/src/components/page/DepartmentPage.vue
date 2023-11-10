@@ -9,7 +9,7 @@
           <input
             class="input input-icon"
             ref="formSearch"
-            placeholder="Tìm kiếm loại tài sản"
+            placeholder="Tìm kiếm phòng ban"
             v-model="keyword"
             @keypress.enter="getPagingProperties"
             @focus="onFocusFormSearch"
@@ -18,7 +18,7 @@
       </div>
       <div class="main-controler-right">
         <button @click="onClickAdd" class="button main-button">
-          Thêm loại tài sản
+          Thêm phòng ban
         </button>
       </div>
     </div>
@@ -43,10 +43,8 @@
                 />
               </th> -->
               <th class="text-center" data-tip="Số thứ tự">STT</th>
-              <th>Mã loại tài sản</th>
-              <th>Tên loại tài sản</th>
-              <th>Tỷ lệ hao mòn</th>
-              <th>Số năm sử dụng</th>
+              <th>Mã phòng ban</th>
+              <th>Tên phòng ban</th>
               <th>Ghi chú</th>
               <th class="text-center">Chức năng</th>
             </tr>
@@ -80,11 +78,9 @@
                 />
               </td> -->
               <td class="text-center">{{ index + 1 }}</td>
-              <td>{{ property.propertyTypeCode }}</td>
-              <td>{{ property.propertyTypeName }}</td>
-              <td>{{ property.attritionRateDefault }}</td>
-              <td>{{ property.usedYearDefault }}</td>
-              <td>{{ property.Desciption }}</td>
+              <td>{{ property.departmentCode }}</td>
+              <td>{{ property.departmentName }}</td>
+              <td>{{ property.description }}</td>
               <td class="text-center">
                 <div class="trow-control">
                   <ms-tool-tip content="Sửa" position="left">
@@ -121,7 +117,7 @@
       @clickDuplicate="onClickDuplicateContextMenu"
     />
     <!-- FormDetail -->
-    <category-detail
+    <department-detail
       v-if="isShowDetail"
       :item="commandName != 'add' ? currentProperty : {}"
       :commandName="commandName"
@@ -144,8 +140,8 @@
       <div v-if="isShowDelete1Item">
         Bạn có muốn xóa tài sản
         <strong
-          >{{ currentProperty.propertyTypeCode }} -
-          {{ currentProperty.propertyTypeName }}</strong
+          >{{ currentProperty.departmentCode }} -
+          {{ currentProperty.departmentName }}</strong
         >?
       </div>
       <!-- delete nhiều item -->
@@ -196,7 +192,7 @@
 
 <script>
 import MsCombobox from "../base/MsCombobox.vue";
-import CategoryDetail from "../base/CategoryDetail.vue";
+import DepartmentDetail from "../base/DepartmentDetail.vue";
 import MsPaging from "../base/MsPaging.vue";
 import MsContextMenu from "../base/MsContextMenu.vue";
 import MsFormConfirm from "../base/MsFormConfirm.vue";
@@ -220,7 +216,7 @@ import MsToolTip from "../base/MsToolTip.vue";
 export default {
   components: {
     MsCombobox,
-    CategoryDetail,
+    DepartmentDetail,
     MsPaging,
     MsContextMenu,
     MsFormConfirm,
@@ -237,7 +233,7 @@ export default {
       pageNumber: 1, // số trang
       pageSize: 20, // số Tài sản trên 1 trang
       maxPage: 15, // tổng số trang
-      propertyTypeID: "", // ID loại tài sản được lọc
+      propertyTypeID: "", // ID phòng ban được lọc
       departmentID: "", // ID Phòng ban được lọc
       keyword: "", // từ khóa được lọc
       totalProperty: 0, // Tổng số tài sản được lọc theo keyword
@@ -259,7 +255,7 @@ export default {
         { code: 3, name: 50 },
         { code: 4, name: 100 },
       ], // danh sách số tài sản được hiển thị trong 1 trang
-      propertyTypes: [], // danh sách loại tài sản
+      propertyTypes: [], // danh sách phòng ban
       departments: [], // danh sách Tên phòng ban
       propertyOnMouseDown: {},
       propertyOnMouseUp: {}, // danh s
@@ -495,8 +491,8 @@ export default {
       if (this.commandName == CommandName.Delete) {
         if (this.selectedProperties.length == 1) {
           //thực hiện xóa trên server
-          let propertyTypeID = this.currentProperty.propertyTypeID;
-          this.deleteProperty(propertyTypeID);
+          let departmentID = this.currentProperty.departmentID;
+          this.deleteProperty(departmentID);
         } else {
           //thực hiện xóa trên server
           this.deleteMultipleProperty();
@@ -838,7 +834,7 @@ export default {
       this.isShowLoading = true;
       this.selectedProperties = [];
       axios({
-        url: `${BASE_URL_Property_Type}/filter?keyword=${this.keyword}`,
+        url: `${BASE_URL_Department}/filter?keyword=${this.keyword}`,
         method: "get",
         data: [],
       })
@@ -856,18 +852,18 @@ export default {
      * xóa 1 tài sản trên DB
      * Author: TTDuc (24/07/2022)
      */
-    deleteProperty(propertyTypeID) {
+    deleteProperty(departmentID) {
       this.isShowLoading = true;
       axios
-        .get(`${BASE_URL_Property_Type}/validate-delete-property-type?propertyTypeId=${propertyTypeID}`)
+        .get(`${BASE_URL_Department}/validate-delete-department?departmentID=${departmentID}`)
         .then((response) => {
           if(response.data){
-            this.executeDelete(propertyTypeID);
+            this.executeDelete(departmentID);
           }else{
             this.commandName = CommandName.Notice;
             this.isShowFormConfirm = true;
             this.isShowDeleteWarning = true;
-            this.msgShowDeleteWarning = "Đã có tài sản thuộc loại tài sản này. Anh/chị cần xóa tài sản và các chứng từ phát sinh liên quan đến tài sản đó trước khi xóa loại tài sản.";
+            this.msgShowDeleteWarning = "Đã có tài sản thuộc phòng ban này. Anh/chị cần xóa tài sản và các chứng từ phát sinh liên quan đến tài sản đó trước khi xóa phòng ban.";
           }
           this.isShowLoading = false;
         })
@@ -880,13 +876,13 @@ export default {
     },
 
     /**
-     * hàm thực hiện delete loại tài sản
+     * hàm thực hiện delete phòng ban
      * @param {*} propertyTypeID 
      */
-    executeDelete(propertyTypeID){
+    executeDelete(departmentID){
       this.isShowLoading = true;
       axios
-        .delete(`${BASE_URL_Property_Type}/${propertyTypeID}`)
+        .delete(`${BASE_URL_Department}/${departmentID}`)
         .then((response) => {
           console.log(response.data);
           this.getPagingProperties();

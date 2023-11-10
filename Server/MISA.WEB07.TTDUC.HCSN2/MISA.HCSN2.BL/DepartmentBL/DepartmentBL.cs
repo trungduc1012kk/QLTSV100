@@ -28,5 +28,20 @@ namespace MISA.HCSN2.BL.DepartmentBL
         }
 
         #endregion
+
+        #region Method
+
+        public bool ValidateDeleteDepartment(Guid departmentID)
+        {
+
+            return _departmentDL.ValidateDeleteDepartment(departmentID);
+        }
+
+        public IEnumerable<Department> GetDepartmentWithFilter(string keyword)
+        {
+            return _departmentDL.GetDepartmentWithFilter(keyword);
+        }
+
+        #endregion
     }
 }

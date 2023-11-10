@@ -9,5 +9,8 @@ namespace MISA.HCSN2.BL.DepartmentBL
 {
     public interface IDepartmentBL : IBaseBL<Department>
     {
+        public bool ValidateDeleteDepartment(Guid departmentID);
+
+        public IEnumerable<Department> GetDepartmentWithFilter(string keyword);
     }
 }
