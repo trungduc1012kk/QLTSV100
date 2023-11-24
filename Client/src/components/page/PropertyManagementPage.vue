@@ -50,6 +50,13 @@
             </div></button
         ></ms-tool-tip>
 
+        <ms-tool-tip content="Nhập khẩu" position="bottom">
+          <button class="btn btn-upload" @click="showPopupImport">
+            <div class="icon">
+              <div class="icon-excel"></div>
+            </div></button
+        ></ms-tool-tip>
+
         <ms-tool-tip content="Xóa" position="bottom">
           <button class="btn" @click="onClickDeleteMultiple">
             <div class="icon">
@@ -59,7 +66,6 @@
         </ms-tool-tip>
       </div>
     </div>
-
     <div id="table">
       <div class="table">
         <table
@@ -296,6 +302,112 @@
 
     <!-- formnotice  -->
     <ms-form-notice v-if="isShowFormNotice" />
+
+    <ms-popup
+      class="form-import-popup"
+      v-if="isShowImportPopup"
+      title="Nhập khẩu tài sản"
+      @closePopup="closePopupImport"
+      width="600"
+      height="400"
+    >
+      <template #body>
+        <div class="steps">
+          <div
+            class="step-item step-1"
+            :class="currentStep == 1 ? 'active' : ''"
+            @click="currentStep = 1"
+          >
+            <div class="step-number">1</div>
+            <div class="step-text">Tải lên tập nhập khẩu</div>
+          </div>
+          <div class="step-line"></div>
+          <div
+            class="step-item step-2"
+            :class="currentStep == 2 ? 'active' : ''"
+          >
+            <div class="step-number">2</div>
+            <div class="step-text">Kết quả nhập khẩu</div>
+          </div>
+        </div>
+        <div class="import-container">
+          <div class="import-container-1" v-if="currentStep == 1">
+            <div class="download-file">
+              <button
+                class="button outline-button"
+                @click="downloadFileImportTemplate"
+              >
+                <div class="icon icon-download"></div>
+                Tải tệp dữ liệu mẫu
+              </button>
+            </div>
+            <div class="import-box">
+              <div class="icon icon-import"></div>
+              <div class="choose-file">
+                <strong>Kéo thả</strong> hoặc
+                <label for="file-import-input" class="file-label"
+                  >Chọn tệp</label
+                >
+                <input
+                  id="file-import-input"
+                  type="file"
+                  class="file-input"
+                  @change="getFileImport"
+                />
+                để nhập khẩu
+              </div>
+            </div>
+          </div>
+          <div class="import-container-2" v-if="currentStep == 2">
+            <!-- <div class="import-text">
+                Sau khi cập nhật, chương trình sẽ:
+                Tự động cập nhật các chứng từ phát sinh trong năm 2023.
+                Tự động lập chứng từ đánh giá lại để cập nhật thông tin loại tài sản và tỷ lệ hao mòn.
+                Anh/chị vui lòng lập lại các chứng từ hao mòn/kiểm kê đã xóa khi cập nhật để tiếp tục quản lý và theo dõi.
+              </div> -->
+            <div class="import-result">
+              <div class="total-record">
+                <div>
+                  <div class="text">Tổng số bản ghi</div>
+                  <div class="number">{{ totalRecordImport }}</div>
+                </div>
+                <div class="icon"></div>
+              </div>
+              <div class="success-error-record">
+                <div class="success-record">
+                  <div>
+                    <div class="text">Thành công</div>
+                    <div class="number">{{ totalRecordImport }}</div>
+                  </div>
+                  <div class="icon"></div>
+                </div>
+                <div class="error-record">
+                  <div>
+                    <div class="text">Thất bại</div>
+                    <div class="number">{{ totalRecordImport }}</div>
+                  </div>
+                  <div class="icon"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="file-box" v-if="isShowFile && currentStep == 1">
+          <div class="file-container">
+            <div class="icon icon-attachment"></div>
+            <div class="file-name">{{ fileName }}</div>
+          </div>
+        </div>
+      </template>
+      <template #control>
+        <button class="button outline-button" @click="closePopupImport">
+          Hủy
+        </button>
+        <button class="button main-button" @click="importExcel">
+          Nhập khẩu
+        </button>
+      </template>
+    </ms-popup>
   </div>
   <div class="loader" v-if="isShowLoading"></div>
 </template>
@@ -307,6 +419,7 @@ import MsPaging from "../base/MsPaging.vue";
 import MsContextMenu from "../base/MsContextMenu.vue";
 import MsFormConfirm from "../base/MsFormConfirm.vue";
 import MsFormNotice from "../base/MsFormNotice.vue";
+import MsPopup from "../base/MsPopup.vue";
 import axios from "axios";
 import { PropertyStatus } from "../../js/common/enumeration";
 import {
@@ -320,8 +433,11 @@ import {
   BASE_URL_Department,
   BASE_URL_Property,
   BASE_URL_Property_Type,
+  BASE_URL_File,
 } from "../../js/common/base-url";
 import MsToolTip from "../base/MsToolTip.vue";
+import { thisExpression } from "@babel/types";
+import { isBuffer } from "lodash";
 
 export default {
   components: {
@@ -332,9 +448,16 @@ export default {
     MsFormConfirm,
     MsFormNotice,
     MsToolTip,
+    MsPopup,
   },
   data() {
     return {
+      totalRecordImport: 0,
+      successRecordImport: 0,
+      errorRecordImport: 0,
+      currentStep: 1,
+      isShowFile: false,
+      fileName: "name.txt",
       posTop: 100000, //vị trí contextMenu
       posLeft: 100000, //vị trí contextMenu
       isShowContextMenu: false, // show contextMenu
@@ -384,6 +507,7 @@ export default {
           method: "clickDuplicate",
         },
       ],
+      isShowImportPopup: false,
     };
   },
   created() {
@@ -393,6 +517,42 @@ export default {
     this.getPropertyTypes();
   },
   methods: {
+    downloadFileImportTemplate() {
+      return axios({
+        url: `${BASE_URL_File}/export-template`,
+        method: "GET",
+        responseType: "blob",
+      })
+        .then((response) => {
+          const href = window.URL.createObjectURL(response.data);
+
+          const anchorElement = document.createElement("a");
+
+          anchorElement.href = href;
+          anchorElement.download = "ImportTemplate.xlsx";
+
+          document.body.appendChild(anchorElement);
+          anchorElement.click();
+
+          document.body.removeChild(anchorElement);
+          window.URL.revokeObjectURL(href);
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+        });
+    },
+
+    closePopupImport() {
+      this.isShowImportPopup = false;
+      this.isShowFile = false;
+      this.fileName = "";
+      this.file = null;
+    },
+
+    showPopupImport() {
+      let me = this;
+      me.isShowImportPopup = true;
+    },
     /**
      * hàm thực hiện khi nhấn nút lên table
      * Author:TTDuc(11/09/2022)
@@ -429,20 +589,10 @@ export default {
     getFileImport(event) {
       try {
         // kiểm tra file rỗng thì gán bằng null
-        console.log(event);
         this.file = event.target.files ? event.target.files[0] : null;
         event.target.value = null;
-        // kiểm tra file excel hay không
-        if (this.file.type === TypeOfExcel) {
-          // thực set thông báo cho lệnh import
-          this.commandName = CommandName.Import;
-        } else {
-          // thông báo sai định dạng file
-          this.titleFormConfirm = ErrorMsg.TypeFileErr;
-          this.commandName = CommandName.Notice;
-        }
-        // hiển thị form confirm
-        this.isShowFormConfirm = true;
+        this.isShowFile = true;
+        this.fileName = this.file.name;
       } catch (err) {
         console.log(err);
       }
@@ -1045,43 +1195,32 @@ export default {
     /**
      * hàm gọi API import excel
      */
-    importExcel(file) {
+    importExcel() {
       // loading
-      this.isShowLoading = true;
-      // tạo form data
-      let formData = new FormData();
-      formData.append("file", file);
+      if (this.file) {
+        this.isShowLoading = true;
+        // tạo form data
+        let formData = new FormData();
+        formData.append("file", this.file);
 
-      // gọi axios
-      axios({
-        url: `${BASE_URL_Property}/import-excel`,
-        method: Methods.Post,
-        data: formData,
-      })
-        .then((res) => {
-          // show thành ông và lấy lại dữ liệu
-
-          // nếu nhập khẩu được 0
-          if (res.data.listId.length == 0) {
-            this.titleFormConfirm = ErrorMsg.ImportErr;
-          }
-          // nhập khẩu được ít hơn tổng số bản ghi
-          else if (res.data.totalCountError > 0) {
-            let totalCountSuccesful = res.data.listId.length;
-            let totalCountError = res.data.totalCountError;
-            this.titleFormConfirm = `Thực hiện nhập khẩu thành công (${totalCountSuccesful}/${
-              totalCountSuccesful + totalCountError
-            }). Tài sản chưa được nhập khẩu có thể trùng mã hoặc thiếu dữ liệu!`;
-          }
-          // nhập khẩu được tất cả bản ghi
-          else {
-            this.titleFormConfirm = `Thực hiện nhập khẩu thành công ${res.data.listId.length} tài sản!`;
-          }
-          this.commandName = CommandName.Notice;
-          this.isShowFormConfirm = true;
-          this.getPagingProperties();
+        // gọi axios
+        axios({
+          url: `${BASE_URL_File}/import-excel`,
+          method: Methods.Post,
+          data: formData,
         })
-        .catch((err) => console.log(err.data));
+          .then((res) => {
+            // show thành ông và lấy lại dữ liệu
+            this.currentStep = 2;
+
+            this.totalRecordImport =
+              res.data.listId.length + res.data.totalCountError;
+            this.successRecordImport = res.data.listId.length;
+            this.errorRecordImport = res.data.totalCountError;
+            this.getPagingProperties();
+          })
+          .catch((err) => console.log(err.data));
+      }
     },
   },
 

@@ -19,4 +19,8 @@
     <ProjectReference Include="..\MISA.HCSN2.Common\MISA.HCSN2.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

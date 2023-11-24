@@ -22,14 +22,6 @@ namespace MISA.HCSN2.BL.PropertyBL
         public int DeleteMultipleProperty(List<Guid> listId);
 
         /// <summary>
-        /// nhập khẩu excel
-        /// Author : TTDuc (10/09/2022)
-        /// </summary>
-        /// <param name="file">File nhập khẩu</param>
-        /// <returns>danh sách Id inport thành công và số bản ghi lỗi</returns>
-        public ImportResult<Guid> ImportFileExcel(IFormFile file);
-
-        /// <summary>
         /// xóa nhiều tài sản trong danh sách ghi tăng
         /// Author : TTDuc(10/10/2022)
         /// </summary>

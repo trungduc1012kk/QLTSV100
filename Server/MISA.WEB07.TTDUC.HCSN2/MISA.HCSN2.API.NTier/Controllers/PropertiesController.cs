@@ -90,32 +90,6 @@ namespace MISA.HCSN2.API.NTier.Controllers
         }
 
         /// <summary>
-        /// chức năng nhập khẩu dữ liệu
-        /// Author: TTDuc(09/09/2022)
-        /// </summary>
-        /// <param name="file">file excel</param>
-        /// <returns>trả về danh sách ID đã thêm được và tổng số bản ghi bị lỗi</returns>
-        [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
-        [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
-        [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
-        [HttpPost("import-excel")]
-        public IActionResult ImportFileExcel(IFormFile file)
-        {
-
-            try
-            {
-                var result = _propertyBL.ImportFileExcel(file);
-
-                return StatusCode(StatusCodes.Status200OK, result);
-
-            }
-            catch (Exception e)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, HandleError.GenerateExceptionResult(e));
-            }
-        }
-
-        /// <summary>
         /// ghi tăng nhiều tài sản
         /// </summary>
         /// <param name="properties">danh sách tài sản</param>
