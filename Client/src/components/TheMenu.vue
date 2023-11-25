@@ -7,18 +7,32 @@
       </router-link>
       <ul class="navbar">
         <div v-for="item in items" :key="item" class="nav-item">
-          <router-link class="nav-item-parent" @click="
-            item.openChild = !item.openChild;
-          activeTo = item.to;" :to="item.to" :class="activeTo === item.to ? 'active' : ''">
+          <router-link
+            class="nav-item-parent"
+            @click="
+              item.openChild = !item.openChild;
+              activeTo = item.to;
+            "
+            :to="item.to"
+            :class="activeTo === item.to ? 'active' : ''"
+          >
             <div class="icon">
               <div :class="item.icon"></div>
             </div>
             <div class="nav-item-text" v-if="isZoomOut">{{ item.name }}</div>
             <div class="icon-down" v-if="item.subMenu && isZoomOut"></div>
           </router-link>
-          <div class="nav-item-childs" v-if="item.subMenu && activeTo === item.to">
-            <router-link class="nav-item-child" v-for="(child, index) in item.subMenu" :key="index"
-              v-show="item.openChild && isZoomOut" :to="child.subTo">
+          <div
+            class="nav-item-childs"
+            v-if="item.subMenu && activeTo === item.to"
+          >
+            <router-link
+              class="nav-item-child"
+              v-for="(child, index) in item.subMenu"
+              :key="index"
+              v-show="item.openChild && isZoomOut"
+              :to="child.subTo"
+            >
               <div class="icon">
                 <div class="icon-active"></div>
               </div>
@@ -44,31 +58,37 @@ export default {
       isZoomOut: true,
       activeTo: "",
       items: [
-        {
-          icon: "icon-tivi",
-          name: "Tổng quan",
-          openChild: false,
-          to: "/tongquan",
-        },
+        // {
+        //   icon: "icon-tivi",
+        //   name: "Tổng quan",
+        //   openChild: false,
+        //   to: "/tongquan",
+        // },
         {
           icon: "icon-oto",
           name: "Tài sản",
           openChild: false,
           to: "/taisan",
-          subMenu: [
-            {
-              subName: "Ghi Tăng",
-              subTo: "/ghitang",
-            },
-            {
-              subName: "Thay đổi thông tin",
-              subTo: "/timkiem",
-            },
-            {
-              subName: "Đánh giá lại",
-              subTo: "/baocao",
-            },
-          ],
+          // subMenu: [
+          //   {
+          //     subName: "Ghi Tăng",
+          //     subTo: "/ghitang",
+          //   },
+          //   {
+          //     subName: "Thay đổi thông tin",
+          //     subTo: "/timkiem",
+          //   },
+          //   {
+          //     subName: "Đánh giá lại",
+          //     subTo: "/baocao",
+          //   },
+          // ],
+        },
+        {
+          icon: "icon-tivi",
+          name: "Ghi tăng",
+          openChild: false,
+          to: "/ghitang",
         },
         // {
         //   icon: "icon-street",

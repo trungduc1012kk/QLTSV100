@@ -19,7 +19,7 @@
 }
 
 .icon-more {
-  background: url("../../assets/icon/qlts-icon.svg")no-repeat -383px -26px;
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -383px -26px;
   width: 3px;
   height: 13px;
 }
@@ -43,7 +43,7 @@
 }
 
 .icon-logout {
-  background: url('../../assets/icon/qlts-icon.svg') no-repeat -112px -553px;
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -112px -553px;
   width: 15px;
   height: 15px;
 }
@@ -262,6 +262,12 @@
   background: url("../../assets/icon/qlts-icon.svg") no-repeat -244px -112px;
   width: 16px;
   height: 16px;
+}
+
+.icon-Export {
+  background: url("../../assets/icon/qlts-icon.svg") no-repeat -200px -65px;
+  width: 16px;
+  height: 18px;
 }
 
 .icon-Edit {

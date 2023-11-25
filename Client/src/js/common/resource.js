@@ -6,6 +6,7 @@ export const CommandName = {
   Notice: "notice", // thông báo
   Duplicate: "duplicate", // nhân bản
   Import: "import", // nhập khẩu
+  Export: "export", // nhập khẩu
 };
 
 export const CommandNameFormDetail = {
@@ -25,6 +26,7 @@ export const CommandNameFormConfirm = {
   Import: "import", // nhập khẩu
   Save: "save", // Lưu
   Close: "close", // đóng
+  Export: "export", // đóng
 };
 
 export const Methods = {

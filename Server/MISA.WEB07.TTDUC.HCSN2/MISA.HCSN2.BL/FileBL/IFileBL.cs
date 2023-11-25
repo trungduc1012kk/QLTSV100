@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MISA.HCSN2.Common.Entities;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace MISA.HCSN2.BL.FileBL
 {
     public interface IFileBL
     {
-        public byte[] ExportFileExcel();
+        public byte[] ExportFileExcel(ExcelPackage pack);
+
+        public byte[] ExportSelectExcel(string lstId, ExcelPackage pack);
 
 
         /// <summary>

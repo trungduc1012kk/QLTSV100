@@ -283,6 +283,21 @@ namespace MISA.HCSN2.DL
             return newCode;
         }
 
+        public IEnumerable<T> GetRecordsByLstId(string lstId)
+        {
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                //tạo câu lệnh truy vấn 
+                string tableName = EntityUtilities.GetTableName<T>();
+                String getAllRecordsCommand = $"SELECT * FROM {tableName} where propertyId in ('{lstId}') order by ModifiedDate Desc, CreatedDate Desc;";
+
+                // thực hiện chạy câu lệnh 
+                var records = mySqlConnection.Query<T>(getAllRecordsCommand);
+
+                return records;
+            }
+        }
+
         #endregion
     }
 }

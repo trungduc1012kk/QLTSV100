@@ -14,7 +14,7 @@
           v-if="isShowButton1"
           tabindex="16"
         >
-          {{ titleButon1 }}
+          {{ titleButton1 }}
         </button>
         <button
           class="button sub-button"
@@ -22,7 +22,7 @@
           v-if="isShowButton2"
           tabindex="15"
         >
-          {{ titleButon2 }}
+          {{ titleButton2 }}
         </button>
         <button
           class="button main-button"
@@ -31,7 +31,7 @@
           tabindex="14"
           ref="buttonSave"
         >
-          {{ titleButon3 }}
+          {{ titleButton3 }}
         </button>
       </div>
     </div>
@@ -50,9 +50,9 @@ export default {
   },
   data() {
     return {
-      titleButon1: "Hủy",
-      titleButon2: "Không lưu",
-      titleButon3: "Đồng ý",
+      titleButton1: "Hủy",
+      titleButton2: "Không lưu",
+      titleButton3: "Đồng ý",
       isShowButton1: false,
       isShowButton2: false,
       isShowButton3: false,
@@ -98,8 +98,8 @@ export default {
   created() {
     //form đóng formDetail
     if (this.commandName === CommandNameFormConfirm.Close) {
-      this.titleButon1 = "Không";
-      this.titleButon3 = "Hủy bỏ";
+      this.titleButton1 = "Không";
+      this.titleButton3 = "Hủy bỏ";
       this.isShowButton1 = true;
       this.isShowButton3 = true;
     }
@@ -116,11 +116,18 @@ export default {
       this.isShowButton1 = true;
       this.isShowButton2 = true;
       this.isShowButton3 = true;
+    } else if (this.commandName === CommandNameFormConfirm.Export) {
+      this.titleButton1 = "Đóng";
+      this.titleButton2 = "Xuất khẩu";
+      this.titleButton3 = "Xuất khẩu tất cả";
+      this.isShowButton1 = true;
+      this.isShowButton2 = true;
+      this.isShowButton3 = true;
     }
     // form thông báo
     else if (this.commandName === CommandNameFormConfirm.Notice) {
       this.isShowButton3 = true;
-      this.titleButon3 = "Đóng";
+      this.titleButton3 = "Đóng";
     } else if (this.commandName === CommandNameFormConfirm.Import) {
       this.isShowButton1 = true;
       this.isShowButton3 = true;

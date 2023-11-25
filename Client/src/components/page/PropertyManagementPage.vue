@@ -37,19 +37,12 @@
         <button @click="onClickAdd" class="button main-button">
           Thêm tài sản
         </button>
-        <ms-tool-tip content="Nhập khẩu" position="bottom">
-          <button class="btn btn-upload">
-            <input
-              type="file"
-              class="input-file"
-              @change="getFileImport"
-              title=""
-            />
+        <ms-tool-tip content="Xuất khẩu" position="bottom">
+          <button class="btn btn-upload" @click="exportExcel">
             <div class="icon">
-              <div class="icon-excel"></div>
+              <div class="icon-Export"></div>
             </div></button
         ></ms-tool-tip>
-
         <ms-tool-tip content="Nhập khẩu" position="bottom">
           <button class="btn btn-upload" @click="showPopupImport">
             <div class="icon">
@@ -241,6 +234,18 @@
       @closeForm="toggleFormDetail"
     />
 
+    <ms-form-confirm
+      v-if="isShowExport"
+      :commandName="commandExport"
+      @returnTrue="exportAllProperty"
+      @returnNoSave="exportSelectProperty"
+      @returnFalse="this.isShowExport = false"
+    >
+      <div>
+        {{ exportMsg }}
+      </div>
+    </ms-form-confirm>
+
     <!-- formConfirm -->
     <ms-form-confirm
       v-if="isShowFormConfirm"
@@ -377,14 +382,14 @@
                 <div class="success-record">
                   <div>
                     <div class="text">Thành công</div>
-                    <div class="number">{{ totalRecordImport }}</div>
+                    <div class="number">{{ successRecordImport }}</div>
                   </div>
                   <div class="icon"></div>
                 </div>
                 <div class="error-record">
                   <div>
                     <div class="text">Thất bại</div>
-                    <div class="number">{{ totalRecordImport }}</div>
+                    <div class="number">{{ errorRecordImport }}</div>
                   </div>
                   <div class="icon"></div>
                 </div>
@@ -425,7 +430,6 @@ import { PropertyStatus } from "../../js/common/enumeration";
 import {
   CommandName,
   Methods,
-  TypeOfExcel,
   NoticeName,
   ErrorMsg,
 } from "../../js/common/resource";
@@ -436,8 +440,6 @@ import {
   BASE_URL_File,
 } from "../../js/common/base-url";
 import MsToolTip from "../base/MsToolTip.vue";
-import { thisExpression } from "@babel/types";
-import { isBuffer } from "lodash";
 
 export default {
   components: {
@@ -452,6 +454,9 @@ export default {
   },
   data() {
     return {
+      isShowExport: false,
+      commandExport: CommandName.Export,
+      exportMsg: "Xuất khẩu tài sản",
       totalRecordImport: 0,
       successRecordImport: 0,
       errorRecordImport: 0,
@@ -552,6 +557,70 @@ export default {
     showPopupImport() {
       let me = this;
       me.isShowImportPopup = true;
+    },
+
+    exportExcel() {
+      this.isShowExport = true;
+      this.exportMsg = "Xuất khẩu tài sản";
+    },
+
+    exportAllProperty() {
+      return axios({
+        url: `${BASE_URL_File}/export-all-excel`,
+        method: "GET",
+        responseType: "blob",
+      })
+        .then((response) => {
+          const href = window.URL.createObjectURL(response.data);
+
+          const anchorElement = document.createElement("a");
+
+          anchorElement.href = href;
+          anchorElement.download = "ExportProperty.xlsx";
+
+          document.body.appendChild(anchorElement);
+          anchorElement.click();
+
+          document.body.removeChild(anchorElement);
+          window.URL.revokeObjectURL(href);
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+        });
+    },
+
+    exportSelectProperty() {
+      if (this.selectedProperties.length > 0) {
+        let listID = this.selectedProperties.map((item) => item.propertyID);
+        return axios({
+          url: `${BASE_URL_File}/export-select-excel`,
+          method: "POST",
+          responseType: "blob",
+          data: listID,
+        })
+          .then((response) => {
+            const href = window.URL.createObjectURL(response.data);
+
+            const anchorElement = document.createElement("a");
+
+            anchorElement.href = href;
+            anchorElement.download = "ExportProperty.xlsx";
+
+            document.body.appendChild(anchorElement);
+            anchorElement.click();
+
+            document.body.removeChild(anchorElement);
+            window.URL.revokeObjectURL(href);
+          })
+          .catch((error) => {
+            console.log("error: ", error);
+          });
+      } else {
+        this.isShowExport = false;
+        this.isShowFormConfirm = true;
+        this.titleFormConfirm = "Vui lòng chọn tài sản";
+        this.commandName = CommandName.Notice;
+      }
     },
     /**
      * hàm thực hiện khi nhấn nút lên table

@@ -68,6 +68,8 @@ router.beforeEach(async (to) => {
     return null;
   });
 
+  if (response && to.fullPath == "/") return "/taisan";
+
   if (!response) return "/login";
 });
 

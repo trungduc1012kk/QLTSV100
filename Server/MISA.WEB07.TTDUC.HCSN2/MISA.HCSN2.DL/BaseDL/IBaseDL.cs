@@ -56,5 +56,9 @@ namespace MISA.HCSN2.DL
         /// <returns>trùng mã hay không</returns>
         public bool CheckDuplicateCode(T record );
         public string GetNewCode();
+
+        public IEnumerable<T> GetRecordsByLstId(string lstId);
+
+
     }
 }

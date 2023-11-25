@@ -8,6 +8,7 @@ using MISA.HCSN2.BL.PropertyBL;
 using MISA.HCSN2.BL.PropertyTypeBL;
 using OfficeOpenXml;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Linq;
 
 namespace MISA.HCSN2.API.NTier.Controllers
 {
@@ -125,15 +126,43 @@ namespace MISA.HCSN2.API.NTier.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
-        [HttpGet("export-excel")]
-        public IActionResult ExportFileExcel(string ListID)
+        [HttpGet("export-all-excel")]
+        public IActionResult ExportFileExcel()
         {
-
             try
             {
-                var result = _fileBL.ExportFileExcel();
-                string excelName = $"PropertyList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
-                return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+                string path = Path.Combine(this._environment.WebRootPath, "FileTemplate/ImportTemplate.xlsx");
+                using (var package = new ExcelPackage(new FileInfo(path)))
+                {
+                    var result = _fileBL.ExportFileExcel(package);
+                    string excelName = $"PropertyList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+                    return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, HandleError.GenerateExceptionResult(e));
+            }
+        }
+
+        [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
+        [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
+        [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [HttpPost("export-select-excel")]
+        public IActionResult ExportSelectExcel([FromBody] List<Guid> listID)
+        {
+            try
+            {
+                var lstId = string.Join("','", listID);
+
+                string path = Path.Combine(this._environment.WebRootPath, "FileTemplate/ImportTemplate.xlsx");
+                using (var package = new ExcelPackage(new FileInfo(path)))
+                {
+                    var result = _fileBL.ExportSelectExcel(lstId, package);
+                    string excelName = $"PropertyList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+                    return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+                }
+                    
 
             }
             catch (Exception e)
@@ -188,6 +217,8 @@ namespace MISA.HCSN2.API.NTier.Controllers
                     ws2.Names.Add("DepartmentName", ws2.Cells[$"B1:B{departments.Count}"]);
                     ws3.Names.Add("PropertyTypeCode", ws3.Cells[$"A1:A{propertyTypes.Count}"]);
                     ws3.Names.Add("PropertyTypeName", ws3.Cells[$"B1:B{propertyTypes.Count}"]);
+                    ws3.Names.Add("UsedYear", ws3.Cells[$"C1:C{propertyTypes.Count}"]);
+                    ws3.Names.Add("AttritionRate", ws3.Cells[$"D1:D{propertyTypes.Count}"]);
 
                     // set validation cho phòng ban
                     var departmentCodeValidation = worksheet.DataValidations.AddListValidation($"C2:C{lastUsedRow}");
@@ -208,6 +239,9 @@ namespace MISA.HCSN2.API.NTier.Controllers
                     // set công thức cho tên phòng ban
                     worksheet.Cells[$"D2:D{lastUsedRow}"].Formula = $"IFERROR(INDEX('{sheetName2}'!DepartmentName,MATCH(OFFSET(INDIRECT(ADDRESS(ROW(), COLUMN())),0,-1),'{sheetName2}'!DepartmentCode,0)), \"\")";
                     worksheet.Cells[$"F2:F{lastUsedRow}"].Formula = $"IFERROR(INDEX('{sheetName3}'!PropertyTypeName,MATCH(OFFSET(INDIRECT(ADDRESS(ROW(), COLUMN())),0,-1),'{sheetName3}'!PropertyTypeCode,0)), \"\")";
+                    worksheet.Cells[$"I2:I{lastUsedRow}"].Formula = $"IFERROR(INDEX('{sheetName3}'!UsedYear,MATCH(OFFSET(INDIRECT(ADDRESS(ROW(), COLUMN())),0,-4),'{sheetName3}'!PropertyTypeCode,0)), \"\")";
+                    worksheet.Cells[$"J2:J{lastUsedRow}"].Formula = $"IFERROR(INDEX('{sheetName3}'!AttritionRate,MATCH(OFFSET(INDIRECT(ADDRESS(ROW(), COLUMN())),0,-5),'{sheetName3}'!PropertyTypeCode,0)), \"\")";
+                    worksheet.Cells[$"K2:K{lastUsedRow}"].Formula = $"IFERROR(INDIRECT(ADDRESS(ROW(), COLUMN() - 3)) * INDIRECT(ADDRESS(ROW(), COLUMN() - 1)) / 100, \"\")";
 
 
                     // protect worksheet
@@ -216,7 +250,7 @@ namespace MISA.HCSN2.API.NTier.Controllers
                     ws3.Protection.IsProtected = true;
 
                     //unlock cho các cột cho người dùng edit
-                    var unlockCellName = new string[] { "A", "B", "C", "E", "G", "H", "I", "J", "K", "L", "M","N" };
+                    var unlockCellName = new string[] { "A", "B", "C", "E", "G", "H", "L", "M","N" };
                     for (int i = unlockCellName.Count() - 1; i >= 0; i--)
                     {
                         worksheet.Cells[$"{unlockCellName[i]}2:{unlockCellName[i]}{lastUsedRow}"].Style.Locked = false;
