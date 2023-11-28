@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MISA.HCSN2.API.NTier.Controllers;
 using MISA.HCSN2.BL;
+using MISA.HCSN2.BL.AuthBL;
 using MISA.HCSN2.BL.BudgetBL;
 using MISA.HCSN2.BL.DepartmentBL;
 using MISA.HCSN2.BL.FileBL;
@@ -11,6 +12,8 @@ using MISA.HCSN2.BL.IncrementPropertyBL;
 using MISA.HCSN2.BL.PropertyBL;
 using MISA.HCSN2.BL.PropertyTypeBL;
 using MISA.HCSN2.DL;
+using MISA.HCSN2.DL.AuthBL;
+using MISA.HCSN2.DL.AuthDL;
 using MISA.HCSN2.DL.BudgetDL;
 using MISA.HCSN2.DL.DepartmentDL;
 using MISA.HCSN2.DL.IncrementPropertyDL;
@@ -38,6 +41,9 @@ builder.Services.AddScoped<IIncrementPropertyBL, IncrementPropertyBL>();
 
 builder.Services.AddScoped<IBudgetDL, BudgetDL>();
 builder.Services.AddScoped<IBudgetBL, BudgetBL>();
+
+builder.Services.AddScoped<IAuthDL, AuthDL>();
+builder.Services.AddScoped<IAuthBL, AuthBL>();
 
 builder.Services.AddScoped<IFileBL, FileBL>();
 

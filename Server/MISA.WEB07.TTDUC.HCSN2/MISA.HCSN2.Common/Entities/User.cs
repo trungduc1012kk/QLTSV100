@@ -11,15 +11,10 @@ namespace MISA.HCSN2.Common.Entities
     /// </summary>
     public class User
     {
-        #region Constructor
-
-        public User(string userName, string password)
-        {
-            UserName = userName;
-            Password = password;
-        }
-
-        #endregion
+        /// <summary>
+        /// id người dùng
+        /// </summary>
+        public int UserID { get; set; }
 
         /// <summary>
         /// tên đăng nhập

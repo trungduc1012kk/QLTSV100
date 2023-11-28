@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MISA.HCSN2.BL.AuthBL;
 using MISA.HCSN2.Common.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,14 +20,11 @@ namespace MISA.HCSN2.API.NTier.Controllers
 
         public static IConfiguration configuration;
 
+        private IAuthBL _authBL;
 
-        private List<User> users = new()
-        {
-            new User("trunggermany", "anhduc00"),
-            new User("trunggermany1", "anhduc001"),
-            new User("trunggermany2", "anhduc002"),
-            new User("string", "string"),
-        };
+        public AuthsController(IAuthBL authBL) {
+            _authBL = authBL;
+        }
 
         /// <summary>
         /// đăng nhập hệ thống
@@ -36,9 +34,9 @@ namespace MISA.HCSN2.API.NTier.Controllers
         [HttpPost("sign-in")]
         public async Task<IActionResult> SignIn([FromBody] User user)
         {
-            var check = users.FirstOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
+            var isAuth = _authBL.CheckAuth(user);
 
-            if (check == null)
+            if (!isAuth)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, "Đăng nhập thất bại!");
             }
